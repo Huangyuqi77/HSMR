@@ -22,7 +22,7 @@ IMG_STD_255  = np.array([0.229, 0.224, 0.225], dtype=np.float32) * 255.
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--input_type', type=str, default='auto', help='Specify the input type. auto: file~video, folder~imgs', choices=['auto', 'video', 'imgs'])
-    parser.add_argument('-i', '--input_path', type=str, required=True, help='The input images root or video file path.')
+    parser.add_argument('-i', '--input_path', type=str, default='data_inputs/demo/example_imgs/humanback', help='The input images root or video file path.')
     parser.add_argument('-o', '--output_path', type=str, default=PM.outputs/'demos', help='The output root.')
     parser.add_argument('-m', '--model_root', type=str, default=DEFAULT_HSMR_ROOT, help='The model root which contains `.hydra/config.yaml`.')
     parser.add_argument('-d', '--device', type=str, default='cuda:0', help='The device.')

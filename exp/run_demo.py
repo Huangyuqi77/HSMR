@@ -1,5 +1,6 @@
 from lib.kits.hsmr_demo import *
-
+import os
+os.environ['PYOPENGL_PLATFORM'] = 'osmesa'
 def main():
     # ⛩️ 0. Preparation.
     args = parse_args()
@@ -59,6 +60,12 @@ def main():
 
         get_logger(brief=True).info(f'🤌 Preparing meshes...')
         m_skin, m_skel = prepare_mesh(pipeline, pd_params)
+        dump_results = {
+            'patch_cam_t': pd_cam_t.numpy(),
+            'skel_verts': m_skel['v'].detach().cpu().numpy() if m_skel is not None else None,  # 保存骨骼顶点
+            'skel_faces': m_skel['f'].detach().cpu().numpy().reshape(1,-1,3) if m_skel is not None else None,  # 保存骨骼面片
+            **{k: v.numpy() for k, v in pd_params.items()},
+        }
         get_logger(brief=True).info(f'🏁 Done.')
 
 
